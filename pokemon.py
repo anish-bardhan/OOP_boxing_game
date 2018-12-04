@@ -3,7 +3,6 @@ import random
 class Boxing():
     def __init__(self):
         self.hp = 100
-        self.block = random.randint(0,5)
 
   def battle(self, other):
         # present the user input
