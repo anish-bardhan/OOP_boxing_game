@@ -5,65 +5,33 @@ class Boxing():
         self.hp = 100
         self.block = random.randint(0,5)
 
-    def battle(self, other):
+  def battle(self, other):
         # present the user input
         atk = int(input("1.) Jab\n2.) Straight\n3.) Hook\n4.) Uppercut\n"))
         # use branching to open up different routes for attack
+        def results(stk):
+            self.block = random.randint(0,5)
+            dmg = stk - self.block
+            other.hp = other.hp - dmg
+            print(self.name, "threw a", stk, "damage swing")
+            print(other.name, "did a", self.block, "block")
+            print(self.name, "did", dmg, "damage to", other.name)
+            print(other.name, "has", other.hp, "health")
+            if other.hp > 0:
+                return other.battle(self)
+            else:
+                print(other.name, 'is knocked out')
         if atk == 1:
-            # subtract attack from health
-            other.hp -= self.jab
-            # add block back to  health
-            other.hp += self.block
-            # add block and jab for total damage
-            dmg = self.jab - self.block
-            # print out damage and health
-            print(self.name, "threw a", self.jab, "damage swing")
-            print(other.name, "did a", self.block, "block")
-            print(self.name, "did", dmg, "damage to", other.name)
-            print(other.name, "has", other.hp, "health")
-            # give an end condition
-            if other.hp > 0:
-                return other.battle(self)
-            else:
-                print(other.name, 'is knocked out')
+            results(self.jab)
         elif atk == 2:
-            other.hp -= self.straight
-            other.hp += self.block
-            dmg = self.straight - self.block
-            print(self.name, "threw a", self.straight, "damage swing")
-            print(other.name, "did a", self.block, "block")
-            print(self.name, "did", dmg, "damage to", other.name)
-            print(other.name, "has", other.hp, "health")
-            if other.hp > 0:
-                return other.battle(self)
-            else:
-                print(other.name, 'is knocked out')
+            results(self.straight)
         elif atk == 3:
-            other.hp -= self.hook
-            other.hp += self.block
-            dmg = self.hook - self.block
-            print(self.name, "threw a", self.hook, "damage swing")
-            print(other.name, "did a", self.block, "block")
-            print(self.name, "did", dmg, "damage to", other.name)
-            print(other.name, "has", other.hp, "health")
-            if other.hp > 0:
-                return other.battle(self)
-            else:
-                print(other.name, 'is knocked out')
+            results(self.hook)
         elif atk == 4:
-            other.hp -= self.upper
-            other.hp += self.block
-            dmg = self.upper - self.block
-            print(self.name, "threw a", self.upper, "damage swing")
-            print(other.name, "did a", self.block, "block")
-            print(self.name, "did", dmg, "damage to", other.name)
-            print(other.name, "has", other.hp, "health")
-            if other.hp > 0:
-                return other.battle(self)
-            else:
-                print(other.name, 'is knocked out')
+            results(self.upper)
         else:
             print("you were caught cheating!")
+            
 #define specifc boxer classes
 class Mayweather(Boxing):
     #init the class
